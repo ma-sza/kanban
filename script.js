@@ -15,7 +15,7 @@ $(function() {
       board.addColumn(column);
     });
 
-  function Column() {
+  function Column(name) {
     var self = this;
 
     this.id = randomString();
@@ -23,6 +23,7 @@ $(function() {
     this.$element = createColumn();
 
     function createColumn() {
+
       // Creating components
       var $column = $('<div>').addClass('column');
       var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
@@ -100,9 +101,9 @@ $(function() {
   };
 
   function initSortable() {
-    $('column-card-list').sortable({
+    $('.column-card-list').sortable({
       connectWith: '.column-card-list',
-      placeholder: 'card-placeholder'
+      placeholder: '.card-placeholder'
     }).disableSelection();
   };
 
