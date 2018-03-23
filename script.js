@@ -1,4 +1,8 @@
 $(function() {
+  // State
+  var columnCount = 0;
+
+
   function randomString() {
     var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ';
     var str = ' ';
@@ -23,18 +27,24 @@ $(function() {
     this.$element = createColumn();
 
     function createColumn() {
+      columnCount++;
 
       // Creating components
       var $column = $('<div>').addClass('column');
       var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
       var $columnCardList = $('<ul>').addClass('column-card-list');
-      var $columnDelete = $('<button>').addClass('btn-delete').text('x');
+      if (columnCount > 3) {
+        var $columnDelete = $('<button>').addClass('btn-delete').text('x');
+        $columnDelete.click(function() {
+          confirm("Are you sure?");
+          self.removeColumn();
+        })
+      }
+
       var $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
 
       // Adding events
-      $columnDelete.click(function() {
-        self.removeColumn();
-      })
+
       $columnAddCard.click(function() {
         self.addCard(new Card(prompt('Enter name of the card')));
       })
